@@ -11,6 +11,15 @@
 |
 */
 
+use App\Games;
+
 Route::get('/', function () {
-    return view('welcome');
+    $items = Games::query()->paginate();
+    return view('index.index', ["pageType" => "main", "items" => $items]);
 });
+
+Route::get("/parse/", "ParseController@index");
+
+Route::post("/parse/{page?}", "ParseController@parse");
+
+Route::get("/game/{id}", "GamesController@detail");
