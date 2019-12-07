@@ -1,0 +1,40 @@
+@import "../_var";
+
+.page-navigation {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+
+    a,
+    span {
+        display: block;
+        padding: 5px 10px;
+        background: #eee;
+        margin: 0 5px;
+        border-radius: 5px;
+
+        &:hover,
+        &.active {
+            background: @greenColor;
+            color: @whiteColor;
+        }
+    }
+
+    .arrow {
+        &.left {
+            &:before {
+                position: relative;
+                display: inline-block;
+                content: "<";
+            }
+        }
+
+        &.right {
+            &:before {
+                position: relative;
+                display: inline-block;
+                content: ">";
+            }
+        }
+    }
+}

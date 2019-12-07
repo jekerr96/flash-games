@@ -20,18 +20,22 @@ class SectionsTableSeeder extends Seeder{
         $sections = [
             [
                 "name" => "Для мальчиков",
+                "url" => "for-man",
                 "description" => ""
             ],
             [
                 "name" => "Для девочек",
+                "url" => "for-woman",
                 "description" => ""
             ],
             [
                 "name" => "Для детей",
+                "url" => "for-kids",
                 "description" => ""
             ],
             [
                 "name" => "Для двоих",
+                "url" => "two-players",
                 "description" => ""
             ],
         ];

@@ -4,7 +4,9 @@
     "description": "",
     "main": "gulpfile.js",
     "dependencies": {
-        "jquery": "^3.4.1"
+        "aos": "^2.3.4",
+        "jquery": "^3.4.1",
+        "tippy.js": "^5.1.2"
     },
     "devDependencies": {
         "gaze": "^1.1.3",

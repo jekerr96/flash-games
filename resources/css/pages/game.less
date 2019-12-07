@@ -1,0 +1,36 @@
+@import "../_var";
+
+.game-page {
+    .game-container {
+        //max-height: 90vh;
+        margin: 30px 0;
+    }
+
+    .tags-wrapper {
+        a {
+            position: relative;
+
+            &:after {
+                position: relative;
+                content: "•";
+                display: inline-block;
+                margin: 0 5px;
+            }
+
+            &:last-child {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .game-description {
+        font-size: 12px;
+        margin: 30px 0;
+    }
+
+    .comment-wrapper {
+        margin: 30px 0;
+    }
+}

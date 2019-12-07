@@ -1,0 +1,14 @@
+@import "../_var";
+
+.tippy-popper {
+    .green-theme {
+        background: @greenColor;
+        filter: drop-shadow(0 0 3px darken(@greenColor, 10%));
+    }
+
+    &[x-placement="bottom"] {
+        .tippy-arrow {
+            border-bottom-color: @greenColor;
+        }
+    }
+}

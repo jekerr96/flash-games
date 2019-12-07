@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Games;
+use App\Sections;
 use Illuminate\Http\Request;
 
 class GamesController extends Controller
@@ -12,6 +13,36 @@ class GamesController extends Controller
 
         if (!$game) abort(404);
 
-        return view("index.game", ["pageType" => "game", "game" => $game]);
+        $sections = Sections::query()->get();
+
+        return view("index.game", ["pageType" => "game", "game" => $game, "sections" => $sections]);
+    }
+
+    public function section($section, $tag = null) {
+        $sectionItem = Sections::query()->where("url", $section)->first();
+
+        if (!$sectionItem) {
+            abort(404);
+        }
+
+        $items = Games::whereHas("genres", function ($query) use ($sectionItem, $tag) {
+           $query->where("section_id", $sectionItem->id);
+
+           if ($tag) {
+               $query->where("id", $tag);
+           }
+        })->paginate(42);
+        $genres = $sectionItem->genres()->orderBy("name")->get();
+        $sections = Sections::query()->get();
+        return view('index.index', ["pageType" => "main", "items" => $items, "sections" => $sections, "genres" => $genres, "tag" => $tag]);
+    }
+
+    public function tag($tag) {
+        $games = Games::whereHas("genres", function ($query) use ($tag) {
+           $query->where("id", $tag);
+        })->paginate(42);
+
+        $sections = Sections::query()->get();
+        return view('index.index', ["pageType" => "main", "items" => $games, "sections" => $sections]);
     }
 }

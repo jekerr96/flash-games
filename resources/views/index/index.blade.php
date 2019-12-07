@@ -1,16 +1,18 @@
 @extends("layout")
 @section("content")
-<? foreach ($items as $item): ?>
-<div>
-    <a href="/game/<?= $item->id ?>">
-        <img src="<?= $item->image ?>" alt="">
-        <span><?= $item->name ?></span>
-    </a>
-    <div>
-        <?= $item->genres->implode("name", " / ") ?>
-    </div>
-</div>
+    <div class="container">
+        <div class="list-games">
+            <? foreach ($items as $item): ?>
+            <div class="game-item" data-aos="flip-up">
+                <a href="/game/<?= $item->id ?>">
+                    <span class="game-image" style="background-image: url('<?= $item->image ?>')"></span>
+                    <span class="game-name"><?= $item->name ?></span>
+                </a>
+            </div>
 
-    <? endforeach ?>
-{{ $items->links() }}
+            <? endforeach ?>
+        </div>
+
+        {{ $items->links() }}
+    </div>
 @endsection

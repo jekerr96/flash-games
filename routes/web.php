@@ -12,11 +12,17 @@
 */
 
 use App\Games;
+use App\Sections;
 
 Route::get('/', function () {
-    $items = Games::query()->paginate();
-    return view('index.index', ["pageType" => "main", "items" => $items]);
+    $items = Games::query()->paginate(42);
+    $sections = Sections::query()->get();
+    return view('index.index', ["pageType" => "main", "items" => $items, "sections" => $sections]);
 });
+
+Route::get("/section/{section}/{tag?}", "GamesController@section");
+
+//Route::get("/tag/{tag}", "GamesController@tag");
 
 Route::get("/parse/", "ParseController@index");
 

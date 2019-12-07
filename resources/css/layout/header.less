@@ -1,3 +1,76 @@
 @import "../_var";
 
+header {
+    .logo {
+        height: 100%;
 
+        img {
+            max-height: 100%;
+        }
+    }
+
+    .header-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100px;
+    }
+
+    .header-actions {
+        margin-left: auto;
+        display: flex;
+
+        .favorite-link,
+        .history-link {
+            margin: 0 10px;
+        }
+
+        .favorite-link {
+            border: 2px solid @greenColor;
+            display: block;
+            border-radius: 10px;
+            padding: 5px;
+
+            i {
+                background: center / cover;
+                .icon("favorite.svg", 30px, 30px);
+                display: block;
+                animation: favorite 5s ease infinite alternate-reverse;
+            }
+        }
+
+        .history-link {
+            border: 2px solid @greenColor;
+            display: block;
+            border-radius: 10px;
+            padding: 5px;
+
+            i {
+                background: center / cover;
+                .icon("gamepad.svg", 30px, 30px);
+                display: block;
+                animation: favorite 5s ease infinite alternate-reverse;
+            }
+        }
+    }
+
+    .header-search {
+        form {
+            margin: 0;
+        }
+
+        input {
+            .transit();
+            border-radius: 10px;
+            background: transparent;
+            padding: 5px 15px;
+            width: 200px;
+            margin-left: 20px;
+            border: 2px solid @greenColor;
+
+            &:focus {
+                width: 400px;
+            }
+        }
+    }
+}
