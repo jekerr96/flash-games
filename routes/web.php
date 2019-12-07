@@ -23,3 +23,11 @@ Route::get("/parse/", "ParseController@index");
 Route::post("/parse/{page?}", "ParseController@parse");
 
 Route::get("/game/{id}", "GamesController@detail");
+
+Route::get("/edit-genres/", "GenresController@index");
+
+Route::get("/edit-genre/{id}", "GenresController@edit");
+
+Route::post("/edit-genre/", "GenresController@update");
+
+Route::post("/delete-genre/", "GenresController@delete");

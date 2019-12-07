@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Games extends Model
 {
-    //
+    public function genres() {
+        return $this->belongsToMany("App\Genres");
+    }
 }

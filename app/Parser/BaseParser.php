@@ -5,6 +5,7 @@ namespace App\Parser;
 
 
 use App\Games;
+use App\Genres;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -22,6 +23,17 @@ class BaseParser {
         }
 
         return $arGames;
+    }
+
+    protected function getGenres() {
+        $genres = Genres::query()->get();
+        $arGenres = [];
+
+        foreach ($genres as $genre) {
+            $arGenres[$genre->name] = $genre;
+        }
+
+        return $arGenres;
     }
 
     protected function saveImageFromUrl($url) {

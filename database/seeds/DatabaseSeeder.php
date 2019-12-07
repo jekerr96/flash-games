@@ -11,15 +11,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(GamesTableSeeder::class);
+         $this->call(SectionsTableSeeder::class);
     }
 }
 
-class GamesTableSeeder extends Seeder{
+class SectionsTableSeeder extends Seeder{
     public function run() {
-        \App\Games::create([
-            "html" => '<embed src="http://g.vseigru.net/igra-dusha-razbojnika.swf" width="860" height="648" allownetworking="internal" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">',
-            "url" => "http://vseigru.net/igry-prikolnye/11594-igra-dusha-razbojnika.html",
-        ]);
+        $sections = [
+            [
+                "name" => "Для мальчиков",
+                "description" => ""
+            ],
+            [
+                "name" => "Для девочек",
+                "description" => ""
+            ],
+            [
+                "name" => "Для детей",
+                "description" => ""
+            ],
+            [
+                "name" => "Для двоих",
+                "description" => ""
+            ],
+        ];
+
+        foreach ($sections as $section) {
+            \App\Sections::create($section);
+        }
     }
 }
