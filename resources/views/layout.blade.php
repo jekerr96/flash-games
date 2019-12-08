@@ -10,18 +10,18 @@
     <header data-aos="fade-down">
         <div class="container">
             <div class="header-wrapper">
-                <div class="logo"><img src="/images/logo.png" alt=""></div>
+                <a href="/" class="logo"><img src="/images/logo.png" alt=""></a>
                 <div class="header-actions">
-                    <a href="javascript:void(0)" class="history-link js-tippy" data-tippy-content="История">
+                    <a href="/history/" class="history-link js-tippy" data-tippy-content="История">
                         <i></i>
                     </a>
-                    <a href="javascript:void(0)" class="favorite-link js-tippy" data-tippy-content="Избранные">
+                    <a href="/favorites/" class="favorite-link js-tippy" data-tippy-content="Избранные">
                         <i></i>
                     </a>
                 </div>
                 <div class="header-search">
-                    <form action="/">
-                        <input type="text" name="q" autocomplete="off" placeholder="Поиск">
+                    <form action="">
+                        <input type="text" name="q" autocomplete="off" placeholder="Поиск" value="<?= $_GET["q"] ?? "" ?>">
                     </form>
                 </div>
             </div>
@@ -35,13 +35,13 @@
             <? endforeach; ?>
         </div>
         <? endif ?>
-        <? if (isset($genres)): ?>
-        <div class="genres-wrapper">
-            <? foreach ($genres as $genre): ?>
-            <? $current = $genre->id == $tag; ?>
-            <a class="genre-item<?= $current ? " active" : "" ?>" href="<?= $current ? $genre->section->getUrl() : $genre->getUrl() ?>"><?= $genre->name ?></a>
-            <? endforeach; ?>
-        </div>
+            
+        <? if (isset($sort)): ?>    
+            <div class="sort-wrapper">
+                <div class="sort-title">Сортировка: </div>
+                <a class="sort-link<?= request()->get("sort") == "date" || !request()->get("sort") ? " active" : "" ?>" href="<?= request()->fullUrlWithQuery (['sort' => 'date']) ?>">По дате</a>
+                <a class="sort-link<?= request()->get("sort") == "popularity" ? " active" : "" ?>" href="<?= request()->fullUrlWithQuery (['sort' => 'popularity']) ?>">По популярности</a>
+            </div>
         <? endif; ?>
     </div>
     @yield("content")

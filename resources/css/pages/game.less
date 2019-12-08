@@ -33,4 +33,57 @@
     .comment-wrapper {
         margin: 30px 0;
     }
+
+    .game-title {
+        display: flex;
+        align-items: center;
+
+        h1 {
+            display: inline-block;
+        }
+    }
+
+    .add-to-favorite {
+        border: 2px solid @greenColor;
+        display: inline-block;
+        border-radius: 10px;
+        padding: 5px;
+        position: relative;
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+        cursor: pointer;
+
+        &:before {
+            .pseudo();
+            .transit();
+            left: 5px;
+            top: 5px;
+            background: center / cover;
+            .icon("favorite-empty.svg", 30px, 30px);
+            animation: favorite 5s ease infinite alternate-reverse;
+            opacity: 1;
+        }
+
+        &:after {
+            .pseudo();
+            .transit();
+            left: 5px;
+            top: 5px;
+            background: center / cover;
+            .icon("favorite.svg", 30px, 30px);
+            animation: favorite 5s ease infinite alternate-reverse;
+            opacity: 0;
+        }
+
+        &.active {
+            &:before {
+                opacity: 0;
+            }
+
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
 }

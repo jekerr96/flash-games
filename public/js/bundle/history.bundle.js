@@ -57,7 +57,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"parse": 0
+/******/ 		"history": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -148,22 +148,22 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push(["./parse.js","commons"]);
+/******/ 	deferredModules.push(["./history.js","commons"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./parse.js":
-/*!******************!*\
-  !*** ./parse.js ***!
-  \******************/
+/***/ "./history.js":
+/*!********************!*\
+  !*** ./history.js ***!
+  \********************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ \"./base.js\");\n\n\nconst ParsePage = _base__WEBPACK_IMPORTED_MODULE_0__[\"BasePage\"].extend({\n        defaults: {}\n    },\n    {\n        init() {\n            this._super();\n            this.from = this.element.querySelector(\".js-from\");\n            this.to = this.element.querySelector(\".js-to\");\n            this.form = this.element.querySelector(\".js-form-parse\");\n            this.info = this.element.querySelector(\".js-info\");\n        },\n\n        \".js-form-parse submit\"(el, ev) {\n            ev.preventDefault();\n            if (this.load) return;\n\n            this.load = true;\n            this.curPage = this.from.value;\n            this.maxPage = this.to.value;\n            this.showInfo(\"Загружается страница №\" + this.curPage);\n            this.sendAjax();\n        },\n\n        sendAjax() {\n            $.ajax({\n                url: \"/parse/\" + this.curPage,\n                processData: false,\n                contentType: false,\n                data: new FormData(this.form),\n                type: \"POST\",\n                success: (data) => {\n                    this.curPage--;\n                    this.showInfo();\n\n                    if (this.curPage >= this.maxPage) {\n                        this.showInfo(\"Загружается страница №\" + this.curPage);\n                        this.sendAjax();\n                    } else {\n                        this.load = false;\n                        this.showInfo(\"Загрузка завершена\");\n                    }\n                },\n                error: () => {\n                    this.showInfo(\"Произошла ошибка на странице №\" + this.curPage);\n                }\n            });\n        },\n\n        showInfo(text) {\n            this.info.innerHTML = text;\n        }\n    });\n\nnew ParsePage(document.querySelector(\"body\"));\n\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"../../../../node_modules/jquery/dist/jquery.js\")))\n\n//# sourceURL=webpack:///./parse.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ \"./base.js\");\n\n\nconst HistoryPage = _base__WEBPACK_IMPORTED_MODULE_0__[\"BasePage\"].extend({\n        defaults: {}\n    },\n    {\n        init() {\n            this._super();\n \n        },\n    });\n\nnew HistoryPage(document.querySelector(\"body\"));\n\n\n//# sourceURL=webpack:///./history.js?");
 
 /***/ })
 

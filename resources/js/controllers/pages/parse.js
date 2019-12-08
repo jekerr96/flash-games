@@ -31,10 +31,10 @@ const ParsePage = BasePage.extend({
                 data: new FormData(this.form),
                 type: "POST",
                 success: (data) => {
-                    this.curPage++;
+                    this.curPage--;
                     this.showInfo();
 
-                    if (this.curPage <= this.maxPage) {
+                    if (this.curPage >= this.maxPage) {
                         this.showInfo("Загружается страница №" + this.curPage);
                         this.sendAjax();
                     } else {

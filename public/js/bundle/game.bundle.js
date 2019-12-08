@@ -163,7 +163,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ \"./base.js\");\n\n\nconst GamePage = _base__WEBPACK_IMPORTED_MODULE_0__[\"BasePage\"].extend({\n        defaults: {}\n    },\n    {\n        init() {\n            this._super();\n\n        },\n    });\n\nnew GamePage(document.querySelector(\"body\"));\n\n\n//# sourceURL=webpack:///./game.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ \"./base.js\");\n\n\nconst GamePage = _base__WEBPACK_IMPORTED_MODULE_0__[\"BasePage\"].extend({\n        defaults: {}\n    },\n    {\n        init() {\n            this._super();\n\n        },\n\n        \".js-favorite click\"(el) {\n            $.ajax({\n                url: \"/favorites/\",\n                type: \"post\",\n                data: {id: el.dataset.id},\n                success: (data) => {\n                    el.classList.toggle(\"active\", data.result);\n\n                    el._tippy.setContent(data.result ? \"Удалить из закладок\" : \"Добавить в закладки\");\n                }\n            });\n        }\n    });\n\nnew GamePage(document.querySelector(\"body\"));\n\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"../../../../node_modules/jquery/dist/jquery.js\")))\n\n//# sourceURL=webpack:///./game.js?");
 
 /***/ })
 

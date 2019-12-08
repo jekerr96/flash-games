@@ -3,6 +3,7 @@
     <div class="container">
         <div class="game-title">
             <h1><?= $game->name ?></h1>
+            <i class="add-to-favorite js-tippy js-favorite<?= $favorite ? " active" : "" ?>" data-tippy-content="<?= $favorite ? "Удалить из закладок" : "Добавить в закладки" ?>" data-id="<?= $game->id ?>"></i>
         </div>
         <div class="game-container">
             <?= $game->html ?>

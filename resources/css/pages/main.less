@@ -1,14 +1,21 @@
 @import "../_var";
 
 .main-page {
-    .list-games {
+    .content-wrapper {
         display: flex;
-        flex-wrap: wrap;
-        margin: 0 -10px;
+        border-top: 2px solid @greenColor;
+        border-bottom: 2px solid @greenColor;
     }
 
     .genres-wrapper {
-        margin: 30px 0;
+        margin: 30px 30px 30px 0;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .list-games {
+        border: none;
     }
 
     .genre-item {
@@ -19,16 +26,14 @@
         margin-top: 5px;
         border-radius: 5px;
 
+        &:first-child {
+            margin-top: 0;
+        }
+
         &:hover,
         &.active {
             background: @greenColor;
             color: @whiteColor;
         }
-    }
-
-    .list-games {
-        border-top: 2px solid @greenColor;
-        border-bottom: 2px solid @greenColor;
-        padding: 30px 0 20px;
     }
 }

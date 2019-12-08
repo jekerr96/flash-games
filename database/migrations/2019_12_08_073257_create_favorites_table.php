@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGamesTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +13,12 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text("name");
-            $table->text("image")->nullable();
-            $table->text("url");
-            $table->text("html")->nullable();
-            $table->text("description")->nullable();
-            $table->integer("popularity")->default(0);
+            $table->char("token", 100);
+            $table->char("ip", 50);
+            $table->bigInteger("game_id")->unsigned();
+            $table->foreign("game_id")->references("id")->on("games");
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('favorites');
     }
 }

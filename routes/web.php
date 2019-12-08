@@ -13,16 +13,26 @@
 
 use App\Games;
 use App\Sections;
+use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    $items = Games::query()->paginate(42);
+Route::get('/', function (Request $request) {
+    $q = $request->get("q");
+
+    $query = Games::query();
+
+    if ($q) {
+        $query->where("name", "like", "%$q%");
+    }
+
+    $order = Games::getSort($request);
+    $query->orderBy($order[0], $order[1])->orderBy("created_at", "desc");
+
+    $items = $query->paginate(42);
     $sections = Sections::query()->get();
-    return view('index.index', ["pageType" => "main", "items" => $items, "sections" => $sections]);
+    return view('index.index', ["pageType" => "main", "items" => $items, "sections" => $sections, "sort" => true]);
 });
 
 Route::get("/section/{section}/{tag?}", "GamesController@section");
-
-//Route::get("/tag/{tag}", "GamesController@tag");
 
 Route::get("/parse/", "ParseController@index");
 
@@ -37,3 +47,9 @@ Route::get("/edit-genre/{id}", "GenresController@edit");
 Route::post("/edit-genre/", "GenresController@update");
 
 Route::post("/delete-genre/", "GenresController@delete");
+
+Route::get("/history/", "HistoryController@index");
+
+Route::post("/favorites", "FavoritesController@toggle");
+
+Route::get("/favorites", "FavoritesController@index");
