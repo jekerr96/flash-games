@@ -48,6 +48,12 @@ Route::post("/edit-genre/", "GenresController@update");
 
 Route::post("/delete-genre/", "GenresController@delete");
 
+Route::get("/edit-game/{id}", "GamesController@edit");
+
+Route::post("/edit-game/", "GamesController@save");
+
+Route::get("/empty-games/", "GamesController@listEmpty");
+
 Route::get("/history/", "HistoryController@index");
 
 Route::post("/favorites", "FavoritesController@toggle");

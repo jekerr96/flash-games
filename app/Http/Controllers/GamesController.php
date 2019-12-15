@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Favorites;
 use App\Games;
+use App\Genres;
 use App\Helper;
 use App\History;
 use App\Sections;
@@ -73,5 +74,40 @@ class GamesController extends Controller
         $genres = $sectionItem->genres()->orderBy("name")->get();
         $sections = Sections::query()->get();
         return view('index.index', ["pageType" => "main", "items" => $items, "sections" => $sections, "genres" => $genres, "tag" => $tag, "sort" => true,]);
+    }
+
+    public function edit($id) {
+        $game = Games::query()->where("id", $id)->first();
+        $genres = Genres::query()->orderBy("name")->get();
+
+        return view("games.edit", ["pageType" => "edit-games", "game" => $game, "genres" => $genres]);
+    }
+
+    public function save(Request $request) {
+        $id = $request->post("id");
+        $game = Games::query()->where("id", $id)->first();
+
+        $game->name = $request->post("name");
+        $game->description = $request->post("description");
+        $game->html = $request->post("html");
+        $game->image = $request->post("image");
+        $game->image = $request->post("image");
+
+        $genres = $request->post("genres");
+
+        $game->genres()->detach();
+        if ($genres) {
+            $game->genres()->attach($request->post("genres"));
+        }
+
+        $game->save();
+
+        return response()->redirectTo("/edit-game/" . $id);
+    }
+
+    public function listEmpty() {
+        $games = Games::query()->doesntHave("genres")->paginate(42);
+
+        return view("games.empty-games", ["pageType" => "edit-games", "games" => $games]);
     }
 }

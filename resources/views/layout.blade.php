@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Главная</title>
 </head>
-<body class="<?= $pageType ?>-page">
+<body class="<?= $pageType ?? "text" ?>-page">
 <main>
     <header data-aos="fade-down">
         <div class="container">
@@ -51,7 +51,7 @@
 
 <?
 $jsFileList = ['commons.chunk'];
-if ($pageType) {
+if (isset($pageType)) {
     $jsFileList[] = $pageType . ".bundle";
 }
 foreach ($jsFileList as $jsFilename):

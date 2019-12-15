@@ -20,4 +20,12 @@ class Games extends Model
 
         return ["created_at", "desc"];
     }
+
+    public function getUrl() {
+        return "/game/" . $this->id;
+    }
+
+    public function getEditUrl() {
+        return "edit-game/" . $this->id;
+    }
 }

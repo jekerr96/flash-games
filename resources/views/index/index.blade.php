@@ -12,12 +12,7 @@
             <? endif; ?>
             <div class="list-games">
                 <? foreach ($items as $item): ?>
-                <div class="game-item" data-aos="flip-up">
-                    <a href="/game/<?= $item->id ?>">
-                        <span class="game-image" style="background-image: url('<?= $item->image ?>')"></span>
-                        <span class="game-name"><?= $item->name ?></span>
-                    </a>
-                </div>
+                    @include("partials.game-item")
                 <? endforeach ?>
                 <? if ($items->isEmpty()): ?>
                 <div class="empty-wrapper">
