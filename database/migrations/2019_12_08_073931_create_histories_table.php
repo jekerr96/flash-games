@@ -18,7 +18,7 @@ class CreateHistoriesTable extends Migration
             $table->char("token", 100);
             $table->char("ip", 50);
             $table->bigInteger("game_id")->unsigned();
-            $table->foreign("game_id")->references("id")->on("games");
+            $table->foreign("game_id")->references("id")->on("games")->onDelete("cascade");
             $table->timestamps();
         });
     }

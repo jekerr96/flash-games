@@ -15,15 +15,25 @@ class GenresController extends Controller
 
     public function edit($id) {
         $genre = Genres::query()->where("id", $id)->first();
-        $sections = Sections::query()->get();
 
         return view("edit-genres.edit", ["pageType" => "edit-genres", "genre" => $genre, "sections" => $sections]);
+    }
+
+    public function create() {
+        $sections = Sections::query()->get();
+
+        return view("edit-genres.create", ["pageType" => "edit-genres", "sections" => $sections]);
     }
 
     public function update(Request $request) {
         $id = $request->post("id");
 
-        $genre = Genres::query()->where("id", $id)->first();
+        if ($id) {
+            $genre = Genres::query()->where("id", $id)->first();
+        } else {
+            $genre = new Genres();
+        }
+
         $genre->name = $request->post("name");
         $genre->description = $request->post("description");
         $genre->section_id = $request->post("section");

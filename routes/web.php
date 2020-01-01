@@ -42,6 +42,8 @@ Route::get("/game/{id}", "GamesController@detail");
 
 Route::get("/edit-genres/", "GenresController@index");
 
+Route::get("/create-genre/", "GenresController@create");
+
 Route::get("/edit-genre/{id}", "GenresController@edit");
 
 Route::post("/edit-genre/", "GenresController@update");
@@ -50,7 +52,11 @@ Route::post("/delete-genre/", "GenresController@delete");
 
 Route::get("/edit-game/{id}", "GamesController@edit");
 
+Route::get("/create-game/", "GamesController@create");
+
 Route::post("/edit-game/", "GamesController@save");
+
+Route::get("/delete-game/{id}", "GamesController@delete");
 
 Route::get("/empty-games/", "GamesController@listEmpty");
 

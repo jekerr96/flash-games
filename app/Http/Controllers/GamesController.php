@@ -83,15 +83,32 @@ class GamesController extends Controller
         return view("games.edit", ["pageType" => "edit-games", "game" => $game, "genres" => $genres]);
     }
 
+    public function create() {
+        $genres = Genres::query()->orderBy("name")->get();
+
+        return view("games.create", ["pageType" => "edit-games", "genres" => $genres]);
+    }
+
     public function save(Request $request) {
         $id = $request->post("id");
-        $game = Games::query()->where("id", $id)->first();
+
+        if ($id) {
+            $game = Games::query()->where("id", $id)->first();
+        } else {
+            $game = new Games();
+        }
 
         $game->name = $request->post("name");
         $game->description = $request->post("description");
         $game->html = $request->post("html");
         $game->image = $request->post("image");
         $game->image = $request->post("image");
+
+        if (!$id) {
+            $game->url = "/";
+        }
+
+        $game->save();
 
         $genres = $request->post("genres");
 
@@ -100,7 +117,7 @@ class GamesController extends Controller
             $game->genres()->attach($request->post("genres"));
         }
 
-        $game->save();
+        if (!$id) $id = $game->id;
 
         return response()->redirectTo("/edit-game/" . $id);
     }
@@ -109,5 +126,13 @@ class GamesController extends Controller
         $games = Games::query()->doesntHave("genres")->paginate(42);
 
         return view("games.empty-games", ["pageType" => "edit-games", "games" => $games]);
+    }
+
+    public function delete($id) {
+//        History::query()->where("game_id", $id)->delete();
+//        Favorites::query()->where("game_id", $id)->delete();
+        Games::query()->where("id", $id)->delete();
+
+        return response()->redirectTo("/");
     }
 }
