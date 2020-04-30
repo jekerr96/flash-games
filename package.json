@@ -6,7 +6,7 @@
     "dependencies": {
         "aos": "^2.3.4",
         "dual-listbox": "^1.4.0-alpha1",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "tippy.js": "^5.1.2"
     },
     "devDependencies": {
